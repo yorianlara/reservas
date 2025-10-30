@@ -32,6 +32,7 @@ class ReservacionesForm
                     ->hourIncrement(1)
                     ->minuteIncrement(5) 
                     ->seconds(false)
+                    ->locale('es')
                     ->required(),   
                 TextInput::make('comensales')
                     ->required()

@@ -25,6 +25,13 @@ class ReservacionesTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('estado')
+                    ->badge()
+                    ->colors([
+                        'warning' => 'pendiente',
+                        'primary' => 'confirmado',
+                        'danger' => 'cancelado',
+                        'success' => 'completado',
+                    ])
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
