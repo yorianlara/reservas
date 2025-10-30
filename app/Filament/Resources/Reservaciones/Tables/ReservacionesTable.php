@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class ReservacionesTable
@@ -15,8 +16,10 @@ class ReservacionesTable
         return $table
             ->columns([
                 TextColumn::make('cliente.full_name')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('mesa.nombre')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('fecha_reserva')
                     ->dateTime()
@@ -43,7 +46,13 @@ class ReservacionesTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('estado')
+                    ->options([
+                        'pendiente' => 'Pendiente',
+                        'confirmado' => 'Confirmado',
+                        'cancelado' => 'Cancelado',
+                        'completado' => 'Completado',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

@@ -15,11 +15,14 @@ class ClientesTable
         return $table
             ->columns([
                 TextColumn::make('nombre')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('apellido')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('Email')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('telefono')
                     ->searchable(),

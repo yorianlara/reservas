@@ -18,7 +18,7 @@ class ReservacionesResource extends Resource
 {
     protected static ?string $model = Reservaciones::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
     protected static ?string $recordTitleAttribute = 'fecha_reserva';
 

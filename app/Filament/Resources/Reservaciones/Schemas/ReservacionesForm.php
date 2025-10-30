@@ -15,15 +15,51 @@ class ReservacionesForm
         return $schema
             ->components([
                 Select::make('cliente_id')
-                    ->required()
                     ->relationship('cliente', 'nombre')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('nombre')
+                            ->maxLength(255)
+                            ->autocomplete(false)
+                            ->required(),
+                        TextInput::make('apellido')
+                            ->maxLength(255)
+                            ->autocomplete(false)
+                            ->required(),
+                        TextInput::make('email')
+                            ->label('Email')
+                            ->email()
+                            ->maxLength(255)
+                            ->unique('clientes', 'email')
+                            ->autocomplete(false)
+                            ->required(),
+                        TextInput::make('telefono')
+                            ->tel()
+                            ->prefix('+34')
+                            ->maxLength(20)
+                            ->unique('clientes', 'telefono')
+                            ->autocomplete(false)
+                            ->required(),
+                    ])
+                    ->required(),
                 Select::make('mesas_id')
                     ->required()
                     ->relationship('mesa', 'nombre')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('nombre')
+                            ->maxLength(255)
+                            ->unique('mesas', 'nombre')
+                            ->placeholder('ej. Mesa 1')
+                            ->required(),
+                        TextInput::make('capacidad')
+                            ->required()
+                            ->numeric()
+                            ->minValue(1)
+                            ->default(2),
+                    ]),
                 Flatpickr::make('fecha_reserva')
                     ->format('m/d/Y H:i')
                     ->time(true) 
